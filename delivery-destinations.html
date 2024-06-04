@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome to Peel Appeal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+
+<body>
+    <header>
+        <div id="headerParent">
+            <div id="child1">
+                <img src="../Images/CompanyLogo.jpg" alt="Logo" id="Logo">
+            </div>
+            <div id="child2">
+                <div id="child2sChild1">
+                    <h1 id="indexHeaderText">PEEL APPEAL</h1>
+                    <p id="indexSloganText"><i>A Banana Bonanza!</i></p>
+                </div>
+            </div>
+        </div>
+        <nav id="nav">
+            <ul>
+				
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../PHP/delivery-destinations.php">Delivery Destinations</a></li>
+                <li><a href="../PHP/clientele.php">Our Clientele</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div id="sectionDiv1">
+            <h3>Peel Appeal is a vibrant and energetic banana-selling company dedicated to providing the freshest and most delicious bananas to our customers.</h3>
+        </div>
+        <div id="sectionDiv2">
+            <blockquote>
+                <h2>Delivery Destinations Page:</h2>
+                <dl id="dlIndexPage">
+                    <dt><b>Peel Appeal proudly serves a wide range of delivery destinations to ensure our fresh, high-quality bananas reach as many customers as possible. 
+                    We currently deliver to the following regions:</b></dt>
+                    <?php
+                        // Code reuse
+                        $conn = require 'connect_to_db.php';
+
+                        // Fetch regions from the database
+                        $query = "SELECT region FROM delivery_destinations";
+                        $result = mysqli_query($conn, $query);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "<ol>";
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<li>". $row['region']. "</li>";
+                            }
+                            echo "</ol>";
+                        } else {
+                            echo "<p>No delivery destinations found.</p>";
+                        }
+
+                        mysqli_close($conn);
+                   ?>
+                </dl>
+                <a id="addMoreDestinations" href="add-delivery-destinations.html">Click to add more regions</a>
+            </blockquote>
+        </div>
+    </section>
+
+    <footer>
+        <div id="footerParent">
+            <div id="footerChild1">
+                <p>&copy; 2024 Peel Appeal. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
